@@ -14,7 +14,7 @@ const Gallery = () => {
                     query: 'sport',
                     orientation: 'landscape',
                     page: 20,
-                    client_id: process.env.REACT_APP_client_id 
+                    client_id: process.env.REACT_APP_client_id
                 },
             });
             setData(response.data);
