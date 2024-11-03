@@ -34,9 +34,9 @@ const Gallery = () => {
             <h1>GALLERY</h1>
             <div className="container">
                 {data.results?.map((image, index) => (
-                    <div className="column">
+                    <div className="column" key={index}>
                         <img
-                            key={index}
+                            key={image.id}
                             src={image.urls.regular}
                             alt={image.alt_description}
                             width="200">

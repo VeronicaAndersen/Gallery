@@ -11,7 +11,6 @@ The application will start a new tab.
 
 ### Next step
 #### Minor fixes
-- If I had more time I would fix the warning for the property "key" to have a uniq key.
 - Make better styling for the gallery.
 #### Bigger fixes
 - Add a dynamic search
