@@ -17,7 +17,6 @@ const Gallery = () => {
                     client_id: process.env.REACT_APP_client_id
                 },
             });
-            console.log(response.data.results);
             
             setData(response.data);
 
