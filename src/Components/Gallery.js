@@ -11,12 +11,14 @@ const Gallery = () => {
         try {
             const response = await axios.get(url, {
                 params: {
+                    per_page: 30,
                     query: 'sport',
                     orientation: 'landscape',
-                    page: 20,
                     client_id: process.env.REACT_APP_client_id
                 },
             });
+            console.log(response.data.results);
+            
             setData(response.data);
 
         } catch (error) {
@@ -39,9 +41,9 @@ const Gallery = () => {
                             key={image.id}
                             src={image.urls.regular}
                             alt={image.alt_description}
-                            width="200">
-                        </img>
-                        <div>{image.alt_description}</div>
+                            width="200"
+                        />
+                        <p>Photo: {image.user.username}</p>
                     </div>
                 ))}
             </div>

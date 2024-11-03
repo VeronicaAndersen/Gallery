@@ -11,6 +11,7 @@ The application will start a new tab.
 
 ### Next step
 #### Minor fixes
+- Api call is made two times needs to look over.
 - Make better styling for the gallery.
 #### Bigger fixes
 - Add a dynamic search
