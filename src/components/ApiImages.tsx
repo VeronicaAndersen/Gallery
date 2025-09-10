@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import Loader from './Loader';
-import { IoMdDownload } from '@react-icons/all-files/io/IoMdDownload';
-import { fetchImages, ImageItem } from '../utils/fetchImages';
-
+import Loader from "./Loader";
+import { IoMdDownload } from "@react-icons/all-files/io/IoMdDownload";
+import { useImageSearch } from "../hooks/useImageSearch";
 
 interface ApiImagesProps {
   category: string;
@@ -11,35 +9,8 @@ interface ApiImagesProps {
   setPage: (page: number) => void;
 }
 
-export default function ApiImages({
-  category,
-  page,
-  perPage = 10,
-  setPage,
-}: ApiImagesProps) {
-  const [data, setData] = useState<ImageItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [totalPages, setTotalPages] = useState<number>(1);
-
-  useEffect(() => {
-    const loadImages = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const results = await fetchImages(category, page, perPage);
-        setData(results);
-        setTotalPages(10); // can be dynamic if API provides total_pages
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadImages();
-  }, [category, page, perPage]);
+export default function ApiImages({ category, page, perPage = 10, setPage }: ApiImagesProps) {
+  const { images, loading, error, totalPages } = useImageSearch(category, page, perPage);
 
   const renderPagination = () => (
     <div className="mt-6 flex justify-center gap-2 flex-wrap">
@@ -81,7 +52,7 @@ export default function ApiImages({
   return (
     <div>
       <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2 p-2">
-        {data.map((item) => (
+        {images.map((item) => (
           <div
             key={item.id}
             className="mb-4 break-inside-avoid border rounded-lg shadow-lg p-2 flex flex-col"
